@@ -1,0 +1,25 @@
+class Solution { 
+    int n;
+    Set<String> numset = new HashSet();
+    private String generate(String curr){
+        if(curr.length() == n){
+            if(!numset.contains(curr)){
+                return curr;
+            }
+            return "";
+        }
+        String AddZero = generate(curr + "0");
+        if(AddZero.length() >0){
+            return AddZero;
+        }
+        return generate(curr + "1");
+    }
+    public String findDifferentBinaryString(String[] nums) {
+        n = nums.length;
+        for(String str: nums){
+            numset.add(str);
+        }
+        return generate("");
+        
+    }
+}
