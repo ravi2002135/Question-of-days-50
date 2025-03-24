@@ -1,0 +1,40 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        //Create ArrayList to store 3 element
+        List<List<Integer>> res = new ArrayList<>();
+        int n = nums.length;
+        Arrays.sort(nums);//Sorting the array
+        for(int i = 0 ; i <n;i++){
+            /*After Sorting Check two condition
+            1 if i > 0 and nums[i] == nums[i-1]
+            then Skip the iteration*/
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            int j = i+1;
+            int k = n - 1;
+            //Iterate while loop till j is less than k
+            while(j < k){
+                //calculate total 
+                int total = nums[i] + nums[j] + nums[k];
+                // total > 0 then k-- because array is sorted and last index contains greater number
+                if(total > 0){
+                    k--;
+                }
+                //Otherwise j++
+                else if(total < 0){
+                    j++;
+                }
+                else{
+                    // if total == 0 add into arrayList
+                    res.add(Arrays.asList(nums[i],nums[j],nums[k]));
+                    j++;
+                    while(nums[j] == nums[j-1] && j < k){
+                        j++;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+}
