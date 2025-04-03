@@ -1,0 +1,19 @@
+class Solution
+public class maxOfSub(int[]cardPoints,int k){
+int n = cardPoints.length;
+int leftSum = 0;
+int RightSum = 0;
+int Maxi = 0;
+for(int i = 0;i<k;i++){
+leftSum += cardPoints[i]
+}
+Maxi = leftSum;
+for(int i = k-1;i>=0;i--){
+leftSum -= cardPoints[i];
+RightSum += cardPoints[idx];
+idx--;
+Maxi = Math.max(Maxi,leftSum + RightSum)
+}
+return Maxi;
+}
+}
