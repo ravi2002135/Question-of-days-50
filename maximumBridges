@@ -1,0 +1,67 @@
+// User function Template for Java
+// using memoziation
+class Solution {
+    public int maximumBridges(int n, int m, int[] a, int[] b) {
+        // code here
+        
+        int[][]memo = new int[n + 1][m + 1];
+        for(int i = 0;i<memo.length;i++){
+            for(int j = 0;j <memo[0].length;j++){
+                memo[i][j] = -1;
+            }
+        }
+        return solve(n,m,a,b,memo);
+        
+        
+    }
+    public int solve(int n ,int m , int[]a ,int[]b,int[][]memo){
+        if(n == 0 || m ==0){
+            return 0;
+        }
+        if(memo[n][m] != -1){
+            return memo[n][m];
+        }
+        int maxi = 0;
+        if(a[n-1] == b[m-1]){
+            maxi = 1 + solve(n-1,m-1,a,b,memo);
+            memo[n][m] = maxi;
+        }
+        else{
+            int pos1 = solve(n-1,m,a,b,memo);
+            int pos2 = solve(n,m-1,a,b,memo);
+            maxi = Math.max(pos1 ,pos2);
+            memo[n][m] = maxi;
+        }
+        
+        return maxi;
+    }
+}
+
+
+
+//using recusrion 
+
+// User function Template for Java
+class Solution {
+    public int maximumBridges(int n, int m, int[] a, int[] b) {
+        // code here
+        return solve(n,m,a,b);
+        
+        
+    }
+    public int solve(int n ,int m , int[]a ,int[]b){
+        if(n == 0 || m ==0){
+            return 0;
+        }
+        int maxi = 0;
+        if(a[n-1] == b[m-1]){
+            maxi = 1 + solve(n-1,m-1,a,b);
+        }
+        else{
+            int pos1 = solve(n-1,m,a,b);
+            int pos2 = solve(n,m-1,a,b);
+            maxi = Math.max(pos1 ,pos2);
+        }
+        return maxi;
+    }
+}
