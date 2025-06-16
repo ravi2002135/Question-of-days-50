@@ -1,0 +1,56 @@
+import java.util.*;
+
+
+public class levelOrder {
+    static class Node{
+        int data;
+        Node left ,right;
+        Node(int data){
+            this.data = data;
+            left = right = null;
+        }
+    }
+    // Function to print level order traversal of a binary tree
+    static void levelOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+        // Create a queue to hold nodes at each level
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null); // Marker for end of level
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.remove();
+            if(currentNode == null) {
+                System.out.println(); // New line for next level
+                if (queue.isEmpty()) {
+                    break; 
+                }
+                else{
+                    queue.add(null); // Add marker for next level
+
+                }
+            }
+            else {
+                System.out.print(currentNode.data + " ");
+                if (currentNode.left != null) {
+                    queue.add(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    queue.add(currentNode.right);
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+        System.out.println("Level order traversal of the tree is: ");
+        levelOrder(root); // Output: 1 2 3 4 5 6 7
+    }
+}
