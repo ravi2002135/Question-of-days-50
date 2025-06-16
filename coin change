@@ -1,0 +1,30 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        int n = coins.length;   
+        int[][] memo = new int[n + 1][amount + 1];
+         for(int i = 0;i<memo.length;i++){
+            for(int j = 0;j < memo[0].length;j++){
+                memo[i][j] = -1;
+            }
+        }   
+        return target(n,amount,coins,memo);
+       
+    }
+    public int target(int n ,int amt,int[]coins,int[][]memo){
+        if(amt == 0){
+            return 1;
+        }
+        if(amt < 0){
+            return 0;
+        }
+        if(n == 0){
+            return 0;
+        }
+        if(memo[n][amt] != -1){
+            return memo[n][amt];
+        }
+        int pos1 = target(n-1,amt,coins,memo);
+        int pos2 =  target(n,amt-coins[n-1],coins,memo);
+        return  memo[n][amt] = pos1 + pos2;
+    }
+}
